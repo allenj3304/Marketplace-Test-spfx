@@ -1,6 +1,6 @@
-Repo Steps for SPFx Marketplace integration - TrackingID#2511140040006028
+# Repo Steps for SPFx Marketplace integration - TrackingID#2511140040006028
 
-Sample SPFx project available here: https://github.com/allenj3304/Marketplace-test-spfx
+Sample SPFx project available here: https://github.com/allenj3304/Marketplace-Test-spfx
 
 1. Setup SPFx dev env: (https://learn.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-development-environment)
 2. Create a new SPFx web part project: (https://learn.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/get-started/build-a-hello-world-web-part)
