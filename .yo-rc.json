@@ -1,0 +1,18 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.15.0",
+    "sdksVersions": {},
+    "version": "1.21.1",
+    "libraryName": "marketplace-test-spfx",
+    "libraryId": "92fadf5f-7952-4734-a4ab-85758cf89847",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "marketplace-test-spfx",
+    "solutionShortDescription": "marketplace-test-spfx description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

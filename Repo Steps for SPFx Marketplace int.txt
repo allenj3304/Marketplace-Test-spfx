@@ -1,0 +1,115 @@
+Repo Steps for SPFx Marketplace integration - TrackingID#2511140040006028
+
+Sample SPFx project available here: https://github.com/allenj3304/Marketplace-test-spfx
+
+1. Setup SPFx dev env: (https://learn.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-development-environment)
+2. Create a new SPFx web part project: (https://learn.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/get-started/build-a-hello-world-web-part)
+	Using PowerShell or VS Code Terminal
+	a. Create new solution directory and change current directory to the new folder> md Marketplace-Test-SPFx  >cd Marketplace-test-SPFx
+	b. Create a new project by running the Yeoman SharePoint Generator> yo @microsoft/sharepoint
+		Select options:
+		* Name: use default
+		* Type: WebPart
+		* Web part name: use default (HelloWorld)
+		* Framework: React
+	c. Replace '{tenantDomain}' in ./.vscode/launch.json and ./config/serve.json with you testing tenant. e.g. testdomain.sharepoint.com/sites/mytest
+3. Access Microsoft Graph: (https://learn.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/get-started/using-microsoft-graph-apis)
+	a. Open ./config/package-solution.json
+	b. Update the solution section to include permission grant request as below
+<code>
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    //...
+
+    "webApiPermissionRequests": [
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Organization.Read.All"
+      }
+    ],
+
+
+    //...
+  }
+}
+</code>
+
+4. Update code to call MS Graph usageRights
+	a. Pass context to HellowWorld.tsx: Add 'context: WebPartContext;' property to IHelloWorldProps.ts, Open HelloWorldWebPart.ts and add 'context: this.context' to  React.createElement, Open HelloWorld.tsx and add context to deconstruction of this.props.
+	b. Open HelloWorld.tsx and replace with following code:
+<code>
+import * as React from 'react';
+import styles from './HelloWorld.module.scss';
+import type { IHelloWorldProps } from './IHelloWorldProps';
+import { PrimaryButton } from '@fluentui/react';
+
+interface IUsageRight {
+    id: string;
+    skuId: string;
+    skuPartNumber: string;
+    catalogId: string;
+    serviceIdentifier: string;
+    servicePlanId: string;
+    state: string;
+    assignedDateTime: string;
+}
+
+interface IUsageRightsResponse {
+    value: IUsageRight[];
+}
+
+export default class HelloWorld extends React.Component<IHelloWorldProps> {
+
+  private usageRights: IUsageRightsResponse | undefined;
+
+  public render(): React.ReactElement<IHelloWorldProps> {
+    const {
+      hasTeamsContext,
+      context
+    } = this.props;
+
+    async function getUsageRights(): Promise<IUsageRightsResponse | undefined> {
+      try {
+        const graphClient = await context.msGraphClientFactory.getClient("3");
+        const result = await graphClient
+          .api(`/me/usageRights`)
+          .version('beta')
+          .get();
+
+        return result.value as IUsageRightsResponse;
+
+      } catch (error) {
+        console.error("Exception while fetching organization data:", error);
+      }
+    };
+
+    function handleButton(event: React.MouseEvent<HTMLButtonElement>): void {
+      event.preventDefault();
+      this.usageRights = getUsageRights();
+    }
+
+    return (
+      <section className={`${styles.helloWorld} ${hasTeamsContext ? styles.teams : ''}`}>
+        <div className={styles.welcome}>
+          <PrimaryButton text="Get Usage Rights" onClick={handleButton} />
+
+          {this.usageRights && this.usageRights.value.length > 0
+            ? (
+                <div>
+                  <h3>Usage Rights:</h3>
+                  <ul>
+                    {this.usageRights.value.map((right, index) => (
+                      <li key={index}>{right.serviceIdentifier} - {right.state}</li>
+                    ))}
+                  </ul>
+                </div>
+            )
+            : (<p>No usage rights found.</p>)}
+        </div>
+      </section>
+    );
+  }
+}
+
+</code>

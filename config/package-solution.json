@@ -1,0 +1,46 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "marketplace-test-spfx-client-side-solution",
+    "id": "92fadf5f-7952-4734-a4ab-85758cf89847",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.21.1"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "marketplace-test-spfx description"
+      },
+      "longDescription": {
+        "default": "marketplace-test-spfx description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "webApiPermissionRequests": [
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Organization.Read.All"
+      }
+    ],
+    "features": [
+      {
+        "title": "marketplace-test-spfx Feature",
+        "description": "The feature that activates elements of the marketplace-test-spfx solution.",
+        "id": "846f301b-b701-4820-89aa-c0e119b3b805",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/marketplace-test-spfx.sppkg"
+  }
+}
