@@ -121,7 +121,8 @@ export default class HelloWorld extends React.Component<IHelloWorldProps> {
 
 ## Part 2: Marketplace offer purchase.
 Purchase a SaaS offer with free plan. You can use my test offer. <b>Send me the test tenant ID and I will add it to the preview Audience.</b>
-https://marketplace.microsoft.com/en-us/product/saas/xrsolutions.xrs-acronym-analysis-test-preview?tab=PlansAndPrice&flightCodes=3624c142-fd12-4fe9-bf20-28483caa4ed6
+https://marketplace.microsoft.com/en-us/product/saas/xrsolutions.xrs-acronym-analysis-test-preview?tab=Overview&flightCodes=d4d4eddd-cf61-41d5-afb2-206eb261e120
+
 Alternatively, create your own test offer following these steps:
 1. Create a new Marketplace offer in Partner Center with the following offer setup:
   a. Offer type: SaaS
