@@ -46,6 +46,7 @@ Short summary on functionality and used technologies.
 - Ensure that you are at the solution folder
 - in the command-line run:
   - **npm install**
+  - **gulp build**
   - **gulp serve**
 
 > Include any additional steps as needed.

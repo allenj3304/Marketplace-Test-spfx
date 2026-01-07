@@ -41,7 +41,7 @@ export default class HelloWorld extends React.Component<IHelloWorldProps> {
       } catch (error) {
         console.error("Exception while fetching organization data:", error);
       }
-    };
+    }
 
     function handleButton(event: React.MouseEvent<HTMLButtonElement>): void {
       event.preventDefault();
