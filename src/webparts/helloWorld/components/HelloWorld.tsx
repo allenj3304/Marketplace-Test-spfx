@@ -31,6 +31,15 @@ export default class HelloWorld extends React.Component<IHelloWorldProps> {
     async function getUsageRights(): Promise<IUsageRightsResponse | undefined> {
       try {
         const graphClient = await context.msGraphClientFactory.getClient("3");
+
+        // Fetch the user's profile information
+        const userProfile = await graphClient
+          .api('/me')
+          .version('beta')
+          .get();
+        console.log("User Profile:", userProfile);
+
+        // Fetch the usage rights for the current user
         const result = await graphClient
           .api(`/me/usageRights`)
           .version('beta')
